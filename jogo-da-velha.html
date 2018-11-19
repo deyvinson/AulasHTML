@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+
+    <title>Jogo da Velha</title>
+
+    <style>
+        body {
+            padding-top: 30px;
+        }
+
+        .container {
+            font-size: 90px;
+            line-height: 150px;
+            display: table;
+            margin: auto;
+        }
+
+        .row {}
+
+        .col {
+            display: inline-block;
+            /*margin-left: -22px;*/
+            padding: 0;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+        }
+
+        .border-top {
+            border-top: 5px solid black;
+        }
+
+        .border-bottom {
+            border-bottom: 5px solid black;
+        }
+
+        .border-left {
+            border-left: 5px solid black;
+        }
+
+        .border-right {
+            border-right: 5px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col" id="l1x1"></div>
+            <div class="col border-left border-right" id="l1x2"></div>
+            <div class="col" id="l1x3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col border-top border-bottom" id="l2x1"></div>
+            <div class="col border-top border-bottom border-left border-right" id="l2x2"></div>
+            <div class="col border-top border-bottom" id="l2x3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col" id="l3x1"></div>
+            <div class="col border-left border-right" id="l3x2"></div>
+            <div class="col" id="l3x3"></div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- <table>
+        <tr>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+        </tr>
+        <tr>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+        </tr>
+        <tr>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+            <td id="1.1"></td>
+        </tr>
+    </table> -->
+
+
+    <script>
+
+        var player = 1;
+
+        var l1x1 = document.getElementById("l1x1");
+        var l1x2 = document.getElementById("l1x2");
+        var l1x3 = document.getElementById("l1x3");
+        var l2x1 = document.getElementById("l2x1");
+        var l2x2 = document.getElementById("l2x2");
+        var l2x3 = document.getElementById("l2x3");
+        var l3x1 = document.getElementById("l3x1");
+        var l3x2 = document.getElementById("l3x2");
+        var l3x3 = document.getElementById("l3x3");
+
+        var cross = "<i class='fas fa-times'></i>";
+        var circle = "<i class='far fa-circle'></i>";
+
+        l1x1.addEventListener("click", InsertElement);
+        l1x2.addEventListener("click", InsertElement);
+        l1x3.addEventListener("click", InsertElement);
+        l2x1.addEventListener("click", InsertElement);
+        l2x2.addEventListener("click", InsertElement);
+        l2x3.addEventListener("click", InsertElement);
+        l3x1.addEventListener("click", InsertElement);
+        l3x2.addEventListener("click", InsertElement);
+        l3x3.addEventListener("click", InsertElement);
+
+        function InsertElement(e) {
+            debugger
+            if (e.currentTarget.innerHTML === "") {
+                if (player === 1) { e.currentTarget.innerHTML = cross; }
+                else { e.currentTarget.innerHTML = circle; }
+
+                if (TestWinner()) {
+                    alert("Player " + player + " win!");
+                }
+                else {
+                    if (player === 1) { player = 2 } else { player = 1 }
+                }
+
+            }
+        }
+
+
+        function TestWinner() {
+            var p1 = document.getElementById("l1x1").innerHTML;
+            var p2 = document.getElementById("l1x2").innerHTML;
+            var p3 = document.getElementById("l1x3").innerHTML;
+            var p4 = document.getElementById("l2x1").innerHTML;
+            var p5 = document.getElementById("l2x2").innerHTML;
+            var p6 = document.getElementById("l2x3").innerHTML;
+            var p7 = document.getElementById("l3x1").innerHTML;
+            var p8 = document.getElementById("l3x2").innerHTML;
+            var p9 = document.getElementById("l3x3").innerHTML;
+
+            debugger
+
+            if (p1 !== "" && p1 === p2 && p1 === p3) { return true }
+            else if (p4 !== "" && p4 === p5 && p4 === p6) { return true }
+            else if (p7 !== "" && p7 === p8 && p7 === p9) { return true }
+            else if (p1 !== "" && p1 === p4 && p1 === p7) { return true }
+            else if (p2 !== "" && p2 === p5 && p2 === p8) { return true }
+            else if (p3 !== "" && p3 === p6 && p3 === p9) { return true }
+            else if (p1 !== "" && p1 === p5 && p1 === p9) { return true }
+            else if (p3 !== "" && p3 === p5 && p3 === p7) { return true }
+            else { return false }
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
